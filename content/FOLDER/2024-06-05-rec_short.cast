@@ -1,0 +1,8 @@
+{"version":2,"width":110,"height":30,"timestamp":1717608890,"idle_time_limit":2.0,"env":{"TERM":"xterm-256color","SHELL":"/bin/bash"},"theme":{"fg":"#000000","bg":"#ffffff","palette":"#171421:#c01c28:#26a269:#a2734c:#12488b:#a347ba:#2aa1b3:#d0cfcc:#5e5c64:#f66151:#33da7a:#e9ad0c:#2a7bde:#c061cb:#33c7de:#ffffff"}}
+[0.129786, "o", "\u001b[?2004h\u001b]0;denis@debian-tipi: ~\u0007\u001b[4m\u001b[01;32mdenis@debian-tipi\u001b[00m:\u001b[01;34m~\u001b[00m\r\r\n$ \u001b[0m"]
+[1.486054, "o", "l"]
+[1.533913, "o", "s"]
+[1.725589, "o", "\r\n\u001b[?2004l\r"]
+[1.735204, "o", "\u001b[0m\u001b[01;34mbin\u001b[0m      \u001b[01;34mDevlab\u001b[0m          \u001b[01;34mDocuments\u001b[0m  gnome-terminal.log  \u001b[01;34mObsidian_vaults\u001b[0m  \u001b[01;34mPublic\u001b[0m     \u001b[01;34mtmp\u001b[0m\r\n\u001b[01;34mDesktop\u001b[0m  dkms-variables  \u001b[01;34mDownloads\u001b[0m  \u001b[01;34mMusic\u001b[0m               \u001b[01;34mPictures\u001b[0m         \u001b[01;34mTemplates\u001b[0m  \u001b[01;34mVideos\u001b[0m\r\n"]
+[1.748572, "o", "\u001b[?2004h\u001b]0;denis@debian-tipi: ~\u0007\u001b[4m\u001b[01;32mdenis@debian-tipi\u001b[00m:\u001b[01;34m~\u001b[00m\r\r\n$ \u001b[0m"]
+[2.877198, "o", "\u001b[?2004l\r\r\nexit\r\n"]

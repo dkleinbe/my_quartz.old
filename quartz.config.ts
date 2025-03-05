@@ -1,6 +1,8 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-
+import { getSingletonHighlighter } from "shiki";
+import { readFile } from "fs/promises";
+import { readFileSync } from "fs";
 /**
  * Quartz 4.0 Configuration
  *
@@ -61,9 +63,17 @@ const config: QuartzConfig = {
         priority: ["frontmatter", "filesystem"],
       }),
       Plugin.SyntaxHighlighting({
+        getHighlighter: (options) =>
+          getSingletonHighlighter({
+            ...options,
+            langs: [
+              "plaintext",
+              async () => JSON.parse(await readFile("content/Shiki/customLanguages/otasks.tmLanguage.json", "utf-8")),
+            ],
+          }),
         theme: {
           light: "github-light",
-          dark: "github-dark",
+          dark: JSON.parse(readFileSync("content/Shiki/customThemes/My Obsidian Theme.json", "utf-8")), //"github-dark",
         },
         keepBackground: false,
       }),
