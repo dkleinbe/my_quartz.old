@@ -17,6 +17,7 @@
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
     "test": "tsx --test",
+    "my_run": "npx quartz build --serve",
     "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
   },
   "engines": {
@@ -62,6 +63,7 @@
     "micromorph": "^0.4.5",
     "minimatch": "^10.0.3",
     "pixi.js": "^8.11.0",
+    "plantuml-encoder": "^1.4.0",
     "preact": "^10.27.0",
     "preact-render-to-string": "^6.5.13",
     "pretty-bytes": "^7.0.0",
@@ -102,6 +104,7 @@
     "@types/hast": "^3.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.1.0",
+    "@types/plantuml-encoder": "^1.4.2",
     "@types/pretty-time": "^1.1.5",
     "@types/source-map-support": "^0.5.10",
     "@types/ws": "^8.18.1",

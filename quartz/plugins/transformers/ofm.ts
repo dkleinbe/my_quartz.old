@@ -12,6 +12,7 @@ import { Element, Literal, Root as HtmlRoot } from "hast"
 import { ReplaceFunction, findAndReplace as mdastFindReplace } from "mdast-util-find-and-replace"
 import rehypeRaw from "rehype-raw"
 import { SKIP, visit } from "unist-util-visit"
+import type { UnistParent }from "unist-util-visit/lib/index.js"
 import path from "path"
 import { splitAnchor } from "../../util/path"
 import { JSResource, CSSResource } from "../../util/resources"
@@ -27,6 +28,8 @@ import { toHast } from "mdast-util-to-hast"
 import { toHtml } from "hast-util-to-html"
 import { capitalize } from "../../util/lang"
 import { PluggableList } from "unified"
+import plantuml from "plantuml-encoder"
+
 
 export interface Options {
   comments: boolean
@@ -34,6 +37,7 @@ export interface Options {
   wikilinks: boolean
   callouts: boolean
   mermaid: boolean
+  plantuml: boolean
   parseTags: boolean
   parseArrows: boolean
   parseBlockReferences: boolean
@@ -50,6 +54,7 @@ const defaultOptions: Options = {
   wikilinks: true,
   callouts: true,
   mermaid: true,
+  plantuml: true,
   parseTags: true,
   parseArrows: true,
   parseBlockReferences: true,
@@ -147,6 +152,12 @@ const videoExtensionRegex = new RegExp(/\.(mp4|webm|ogg|avi|mov|flv|wmv|mkv|mpg|
 const wikilinkImageEmbedRegex = new RegExp(
   /^(?<alt>(?!^\d*x?\d*$).*?)?(\|?\s*?(?<width>\d+)(x(?<height>\d+))?)?$/,
 )
+
+async function getPlantumlSvg(url:string) {
+  let rep = await fetch(url)
+  return rep.text()
+}
+
 
 export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>> = (userOpts) => {
   const opts = { ...defaultOptions, ...userOpts }
@@ -546,6 +557,68 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>>
           }
         })
       }
+
+      if (opts.plantuml) {
+        plugins.push(() => {
+          return async (tree: Root, _file) => {
+
+            interface NodePos { node: Code, index: number, parent: UnistParent }
+            const plantuml_node: NodePos[] = []
+            visit(tree, "code", (node: Code, index, parent) => {
+              
+              if (parent && index != undefined && node.lang === "plantuml") {
+                
+                plantuml_node.push({ node: node, index: index, parent: parent })
+                return SKIP
+                
+              }
+            })
+
+            for (const anode of plantuml_node) {
+
+              const encoded = plantuml.encode(anode.node.value)
+              const url = "https://www.plantuml.com/plantuml/svg/" + encoded
+              
+              const svg = await getPlantumlSvg(url)
+              //console.log(svg)   
+              //console.log('HELLO ')
+          
+              const newNode: Html = {
+                type: "html",
+                value: svg, 
+              }
+              anode.parent.children.splice(anode.index, 1, newNode)
+          }
+        }
+      })
+
+              /*
+              
+                const url = "https://www.plantuml.com/plantuml/svg/" + encoded
+                //const resultPromise = new Promise((resolve, reject) => {
+                //    resolve(fetch(url))
+                //})
+                return async (_file, tree) {
+                  
+                  fetch(url).then(res => {
+                  console.log('HELLO ' + res)
+                  
+                  const newNode: Html = {
+                    type: "html",
+                    value: `<p>**** RE COUCOU</p>`,
+                  }
+                  parent.children.splice(index, 1, newNode)
+                  return SKIP
+                })
+                .catch(err => {
+                    console.error("Error in fetching plantuml svg:", err)
+                    return SKIP
+                })      
+                    */        
+            
+          
+      }
+
 
       return plugins
     },
