@@ -1,26 +1,25 @@
 ---
-{"publish":true,"created":"03.08.2025 - 12:05","modified":"09.08.2025 - 17:40","tags":["dev","git","kb"],"cssclasses":""}
+{"publish":true,"created":"2025.08.03 12:05","modified":"2025.08.10 12:45","tags":["dev","git","kb"],"cssclasses":""}
 ---
 
+
 # GIT
+
 ## Doc
 
 - [Git - Reference](https://git-scm.com/docs)
 - [Git - Book](https://git-scm.com/book/en/v2)
 - [Git Immersion](https://gitimmersion.com/)
 
-
 ## How to stop tracking and ignore changes to a file
 
 - source:  [How to stop tracking and ignore changes to a file in Git? - Stack Overflow](https://stackoverflow.com/questions/936249/how-to-stop-tracking-and-ignore-changes-to-a-file-in-git)
-
 - Just calling `git rm --cached` on each of the files you want to remove from revision control should be fine
 - see also: [Git - Maintenance and Data Recovery](https://git-scm.com/book/en/v2/Git-Internals-Maintenance-and-Data-Recovery)
 
 ## Git update-index --skip-worktree, and how I used to hate config files
 
 - source:  [Git update-index --skip-worktree, and how I used to hate config files](https://compiledsuccessfully.dev/git-skip-worktree/)
-
 - Set flag
 
 ```bash
@@ -53,21 +52,21 @@ git reset --hard origin/main
 - source:  [Configuring a remote repository for a fork - GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-repository-for-a-fork)
 
 1. List the current configured remote repository for your fork.
-    
+
     ```shell
     $ git remote -v
     > origin  https://github.com/YOUR-USERNAME/YOUR-FORK.git (fetch)
     > origin  https://github.com/YOUR-USERNAME/YOUR-FORK.git (push)
     ```
-    
+
 2. Specify a new remote _upstream_ repository that will be synced with the fork.
-    
+
     ```shell
     git remote add upstream https://github.com/ORIGINAL-OWNER/ORIGINAL-REPOSITORY.git
     ```
-    
+
 3. Verify the new upstream repository you've specified for your fork.
-    
+
     ```shell
     $ git remote -v
     > origin    https://github.com/YOUR-USERNAME/YOUR-FORK.git (fetch)
@@ -87,7 +86,7 @@ Before you can sync your fork with an upstream repository, you must configure a 
 2. Change the current working directory to your local project.
     
 3. Fetch the branches and their respective commits from the upstream repository. Commits to `BRANCH-NAME` will be stored in the local branch `upstream/BRANCH-NAME`.
-    
+
     ```shell
     $ git fetch upstream
     > remote: Counting objects: 75, done.
@@ -97,16 +96,16 @@ Before you can sync your fork with an upstream repository, you must configure a 
     > From https://github.com/ORIGINAL-OWNER/ORIGINAL-REPOSITORY
     >  * [new branch]      main     -> upstream/main
     ```
-    
+
 4. Check out your fork's local default branch - in this case, we use `main`.
-    
+
     ```shell
     $ git checkout main
     > Switched to branch 'main'
     ```
-    
+
 5. Merge the changes from the upstream default branch - in this case, `upstream/main` - into your local default branch. This brings your fork's default branch into sync with the upstream repository, without losing your local changes.
-    
+
     ```shell
     $ git merge upstream/main
     > Updating a422352..5fdff0f
@@ -117,9 +116,9 @@ Before you can sync your fork with an upstream repository, you must configure a 
     >  delete mode 100644 README
     >  create mode 100644 README.md
     ```
-    
+
     If your local branch didn't have any unique commits, Git will perform a fast-forward. For more information, see [Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging) in the Git documentation.
-    
+
     ```shell
     $ git merge upstream/main
     > Updating 34e91da..16c56ad
@@ -127,11 +126,10 @@ Before you can sync your fork with an upstream repository, you must configure a 
     >  README.md                 |    5 +++--
     >  1 file changed, 3 insertions(+), 2 deletions(-)
     ```
-    
-    If your local branch had unique commits, you may need to resolve conflicts. For more information, see [Addressing merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts).
-    
 
->[!tip]
+    If your local branch had unique commits, you may need to resolve conflicts. For more information, see [Addressing merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts).
+
+>[!tip]  
 >Syncing your fork only updates your local copy of the repository. To update your fork on GitHub.com, you must [push your changes](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository).
 
 ## Delete tag
