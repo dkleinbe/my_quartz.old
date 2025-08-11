@@ -1,9 +1,13 @@
 ---
-{"publish":true,"created":"03.08.2025 - 18:12","modified":"03.08.2025 - 18:12","cssclasses":""}
+{"publish":true,"title":"This is a title","created":"03.08.2025 - 18:12","modified":"03.08.2025 - 18:12","cssclasses":""}
 ---
 
 
 # Publishing
+
+## Link test
+
+- [[Systems/git]]
 
 ## Image test
 
